@@ -8,9 +8,9 @@
     <name>Airbnb ReAir Main</name>
     <packaging>jar</packaging>
     <parent>
-      <groupId>com.airbnb</groupId>
-      <artifactId>airbnb-reair-parent</artifactId>
-      <version>1.0.0</version>
+        <groupId>com.airbnb</groupId>
+        <artifactId>airbnb-reair-parent</artifactId>
+        <version>1.0.0</version>
     </parent>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -40,7 +40,7 @@
         <dependency>
             <artifactId>airbnb-reair-hive-hooks</artifactId>
             <groupId>com.airbnb</groupId>
-	    <version>1.0.0</version>
+            <version>1.0.0</version>
         </dependency>
 
         <dependency>
@@ -59,9 +59,9 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.17</version>
+            <version>5.1.40</version>
             <type>jar</type>
-	    <scope>provided</scope>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
@@ -100,7 +100,7 @@
                 of the shaded JAR. Please update this version as needed for your cluster. If you
                 want add the JAR's at runtime, change the scope to 'provided'.
              -->
-            <version>0.13.1-cdh5.3.3</version>
+            <version>1.2.1</version>
             <scope>compile</scope>
             <!--
     	        Since we only need the Thrift bindings, we can exclude the other transitive
@@ -145,42 +145,42 @@
         <dependency>
             <groupId>org.apache.hive</groupId>
             <artifactId>hive-exec</artifactId>
-            <version>0.13.1-cdh5.3.3</version>
+            <version>1.2.1</version>
             <scope>test</scope>
         </dependency>
 
         <dependency>
             <groupId>org.apache.hadoop</groupId>
             <artifactId>hadoop-common</artifactId>
-            <version>2.5.0-cdh5.3.3</version>
+            <version>2.6.0-cdh5.4.8</version>
             <scope>provided</scope>
         </dependency>
 
         <dependency>
             <groupId>org.apache.hadoop</groupId>
             <artifactId>hadoop-distcp</artifactId>
-            <version>2.5.0-cdh5.3.3</version>
+            <version>2.6.0-cdh5.4.8</version>
             <scope>provided</scope>
         </dependency>
 
         <dependency>
             <groupId>org.apache.hadoop</groupId>
             <artifactId>hadoop-minicluster</artifactId>
-            <version>2.5.0</version>
+            <version>2.6.0</version>
             <scope>test</scope>
         </dependency>
 
         <dependency>
             <groupId>org.apache.hadoop</groupId>
             <artifactId>hadoop-mapreduce-client-core</artifactId>
-            <version>2.5.0-cdh5.3.3</version>
+            <version>2.6.0-cdh5.4.8</version>
             <scope>provided</scope>
         </dependency>
 
         <dependency>
             <groupId>org.apache.hadoop</groupId>
             <artifactId>hadoop-mapreduce-client-jobclient</artifactId>
-            <version>2.5.0-cdh5.3.3</version>
+            <version>2.6.0-cdh5.4.8</version>
             <scope>provided</scope>
         </dependency>
 
@@ -206,7 +206,7 @@
         </resources>
         <plugins>
             <plugin>
-                  <artifactId>maven-checkstyle-plugin</artifactId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

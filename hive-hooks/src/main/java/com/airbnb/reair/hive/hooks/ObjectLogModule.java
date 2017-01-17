@@ -7,9 +7,11 @@ import org.apache.hadoop.hive.ql.hooks.Entity;
 import org.apache.hadoop.hive.ql.hooks.ReadEntity;
 import org.apache.hadoop.hive.ql.hooks.WriteEntity;
 import org.apache.hadoop.hive.ql.hooks.WriteEntity.WriteType;
+import org.apache.log4j.Logger;
 import org.apache.thrift.TException;
 import org.apache.thrift.TSerializer;
 import org.apache.thrift.protocol.TJSONProtocol;
+import sun.rmi.runtime.Log;
 
 import java.net.URI;
 import java.sql.Connection;
@@ -24,6 +26,7 @@ import java.util.Set;
  */
 public class ObjectLogModule extends BaseLogModule {
 
+  public static Logger LOG = Logger.getLogger(ObjectLogModule.class);
   public static final String TABLE_NAME_KEY =
       "airbnb.reair.audit_log.objects.table_name";
 
@@ -252,6 +255,8 @@ public class ObjectLogModule extends BaseLogModule {
         } catch (Exception e) {
           throw new EntityException(e);
         }
+      case FUNCTION:
+        return entity.getFunctionName();
       default:
         throw new EntityException("Unhandled type: "
             + entity.getType() + " entity: " + entity);
@@ -301,6 +306,8 @@ public class ObjectLogModule extends BaseLogModule {
           } catch (Exception e) {
             throw new EntityException(e);
           }
+        case FUNCTION:
+          return entity.getFunctionName();
         default:
           throw new EntityException("Unhandled type: "
               + entity.getType() + " entity: " + entity);

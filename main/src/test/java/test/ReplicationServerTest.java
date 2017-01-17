@@ -423,6 +423,7 @@ public class ReplicationServerTest extends MockClusterTest {
         handler,
         oldPartition,
         newPartition,
+        handler.get_table(dbName, tableName),
         hiveConf
     );
   }

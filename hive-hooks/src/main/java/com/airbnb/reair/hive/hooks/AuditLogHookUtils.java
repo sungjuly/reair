@@ -198,10 +198,13 @@ public class AuditLogHookUtils {
             command,
             semanticAnalyzer,
             null,
+            sessionState.getQueryId(),
             commandType != null ? commandType.getOperationName() : null
     );
 
-    HookContext hookContext = new HookContext(queryPlan, null);
+    HookContext hookContext = new HookContext(queryPlan, null,
+            null, sessionState.getUserName(),
+            sessionState.getUserIpAddress(), null);
     hookContext.setInputs(readEntities);
     hookContext.setOutputs(writeEntities);
     hookContext.setConf(hiveConf);
@@ -247,6 +250,7 @@ public class AuditLogHookUtils {
       HiveMetaStore.HMSHandler hmsHandler,
       Partition oldPartition,
       Partition newPartition,
+      org.apache.hadoop.hive.metastore.api.Table table,
       HiveConf hiveConf) throws Exception {
     final MetastoreAuditLogListener metastoreAuditLogListener =
         new MetastoreAuditLogListener(hiveConf);
@@ -254,6 +258,7 @@ public class AuditLogHookUtils {
     AlterPartitionEvent event = new AlterPartitionEvent(
         oldPartition,
         newPartition,
+        table,
         true,
         hmsHandler
     );

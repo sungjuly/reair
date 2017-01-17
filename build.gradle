@@ -12,7 +12,7 @@ subprojects {
 
   configurations.all {
     // Version conflict between velocity:1.7 (depends on common-lang:2.4) and various hadoop
-    // libraries, e.g. hadoop-common:jar:2.5.0-cdh5.3.3 (depend on common-lang2.6). Here we force
+    // libraries, e.g. hadoop-common:jar:2.6.0-cdh5.4.8 (depend on common-lang2.6). Here we force
     // common-lang:2.6 to be used. This is dangerous, but common-lang:2.6 seems to be compatible
     // with velocity:1.7, so keep it for now, until the conflict can be fixed.
   }

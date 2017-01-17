@@ -179,10 +179,10 @@ public class AuditCoreLogModule extends BaseLogModule {
             throw new EntityException(ex);
           }
           break;
-        case UDF:
+        case FUNCTION:
           LOG.info(
-              "Skipping logging of UDF type to audit log - "
-                  + "displayName: " + e.getUDF().getDisplayName());
+              "Skipping logging of FUNCTION type to audit log - "
+                  + "displayName: " + e.getFunctionName());
           break;
         default:
           throw new EntityException("Unhandled type: "

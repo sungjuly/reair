@@ -955,6 +955,7 @@ public class MetastoreAuditLogListenerTest {
     AlterPartitionEvent event = new AlterPartitionEvent(
         oldPartition,
         newPartition,
+        table,
         false,
         handler
     );

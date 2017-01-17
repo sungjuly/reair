@@ -26,6 +26,7 @@ import org.apache.log4j.Logger;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 /**
@@ -158,17 +159,18 @@ public class MetastoreAuditLogListener extends MetaStoreEventListener {
       Table table = new Table(event.getTable());
       Set<ReadEntity> readEntities = new HashSet<>();
       Set<WriteEntity> writeEntities = new HashSet<>();
-
-      for (org.apache.hadoop.hive.metastore.api.Partition partition :
-          event.getPartitions()) {
-        writeEntities.add(
-            new WriteEntity(
-                new Partition(table, partition),
-                WriteType.INSERT
-            )
-        );
+      if (event != null && event.getPartitionIterator() != null) {
+        Iterator<org.apache.hadoop.hive.metastore.api.Partition> it = event.getPartitionIterator();
+        while (it.hasNext()) {
+          org.apache.hadoop.hive.metastore.api.Partition partition = it.next();
+          writeEntities.add(
+                  new WriteEntity(
+                          new Partition(table, partition),
+                          WriteType.INSERT
+                  )
+          );
+        }
       }
-
       run(readEntities, writeEntities, HiveOperation.THRIFT_ADD_PARTITION);
     } catch (Exception e) {
       throw new RuntimeException(e);
@@ -187,15 +189,18 @@ public class MetastoreAuditLogListener extends MetaStoreEventListener {
   public void onDropPartition(DropPartitionEvent event) throws MetaException {
     try {
       Set<ReadEntity> readEntities = new HashSet<>();
-
-      readEntities.add(
-          new ReadEntity(
-            new Partition(new Table(event.getTable()), event.getPartition())
-          )
-      );
-
       Set<WriteEntity> writeEntities = new HashSet<>();
-
+      if (event != null && event.getPartitionIterator() != null) {
+        Iterator<org.apache.hadoop.hive.metastore.api.Partition> it = event.getPartitionIterator();
+        while (it.hasNext()) {
+          org.apache.hadoop.hive.metastore.api.Partition partition = it.next();
+          readEntities.add(
+                  new ReadEntity(
+                          new Partition(new Table(event.getTable()), partition)
+                  )
+          );
+        }
+      }
       run(readEntities, writeEntities, HiveOperation.THRIFT_DROP_PARTITION);
     } catch (Exception e) {
       throw new RuntimeException(e);
